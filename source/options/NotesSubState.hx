@@ -47,7 +47,9 @@ class NotesSubState extends MusicBeatSubstate
 		super();
 		
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		bg.color = 0xFFea71fd;
+		bg.color = 0xFF3E57F9;
+		bg.setGraphicSize(Std.int(bg.width * 1.1));
+		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
@@ -148,6 +150,12 @@ class NotesSubState extends MusicBeatSubstate
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 			}
 			if(controls.RESET #if android || _virtualpad.buttonC.justPressed #end) {
+				for (i in 0...3) {
+					resetValue(curSelected, i);
+				}
+				FlxG.sound.play(Paths.sound('scrollMenu'));
+			}
+			if(controls.RESET) {
 				for (i in 0...3) {
 					resetValue(curSelected, i);
 				}

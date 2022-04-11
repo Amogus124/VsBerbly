@@ -4,7 +4,6 @@ package options;
 import Discord.DiscordClient;
 #end
 import flash.text.TextField;
-import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
@@ -25,7 +24,6 @@ import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
-import openfl.Lib;
 
 using StringTools;
 
@@ -58,25 +56,21 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			"Pretty self explanatory, isn't it?",
 			'framerate',
 			'int',
-			60);
+			120);
 		addOption(option);
-
-		option.minValue = 60;
+		option.minValue = 24;
 		option.maxValue = 240;
 		option.displayFormat = '%v FPS';
 		option.onChange = onChangeFramerate;
 		#end
 
-		/*
 		var option:Option = new Option('Persistent Cached Data',
 			'If checked, images loaded will stay in memory\nuntil the game is closed, this increases memory usage,\nbut basically makes reloading times instant.',
 			'imagesPersist',
 			'bool',
-			false);
+			true);
 		option.onChange = onChangePersistentData; //Persistent Cached Data changes FlxGraphic.defaultPersist
 		addOption(option);
-		*/
-
 		super();
 	}
 
@@ -86,7 +80,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		{
 			var sprite:Dynamic = sprite; //Make it check for FlxSprite instead of FlxBasic
 			var sprite:FlxSprite = sprite; //Don't judge me ok
-			if(sprite != null && (sprite is FlxSprite) && !(sprite is FlxText)) {
+			if(sprite != null && !(sprite is FlxText)) {
 				sprite.antialiasing = ClientPrefs.globalAntialiasing;
 			}
 		}
@@ -104,5 +98,10 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			FlxG.drawFramerate = ClientPrefs.framerate;
 			FlxG.updateFramerate = ClientPrefs.framerate;
 		}
+	}
+
+	function onChangePersistentData()
+	{
+		FlxGraphic.defaultPersist = ClientPrefs.imagesPersist;
 	}
 }
