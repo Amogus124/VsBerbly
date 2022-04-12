@@ -86,7 +86,7 @@ class LoadingState extends MusicBeatState
 	{
 		if (!Assets.cache.hasSound(path))
 		{
-			var library = Assets.getLibrary("songs");
+			var library = SUtil.getPath() + Assets.getLibrary("songs");
 			final symbolPath = path.split(":").pop();
 			// @:privateAccess
 			// library.types.set(symbolPath, SOUND);
@@ -99,7 +99,7 @@ class LoadingState extends MusicBeatState
 	
 	function checkLibrary(library:String) {
 		trace(Assets.hasLibrary(library));
-		if (Assets.getLibrary(library) == null)
+		if (SUtil.getPath() + Assets.getLibrary(library) == null)
 		{
 			@:privateAccess
 			if (!LimeAssets.libraryPaths.exists(library))
@@ -184,7 +184,7 @@ class LoadingState extends MusicBeatState
 	
 	static function isLibraryLoaded(library:String):Bool
 	{
-		return Assets.getLibrary(library) != null;
+		return SUtil.getPath() + Assets.getLibrary(library) != null;
 	}
 	#end
 	
@@ -200,7 +200,7 @@ class LoadingState extends MusicBeatState
 		var id = "songs";
 		var promise = new Promise<AssetLibrary>();
 
-		var library = LimeAssets.getLibrary(id);
+		var library = SUtil.getPath() + LimeAssets.getLibrary(id);
 
 		if (library != null)
 		{
