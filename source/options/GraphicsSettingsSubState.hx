@@ -4,6 +4,7 @@ package options;
 import Discord.DiscordClient;
 #end
 import flash.text.TextField;
+import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
@@ -24,6 +25,7 @@ import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
+import openfl.Lib;
 
 using StringTools;
 
@@ -56,9 +58,9 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			"Pretty self explanatory, isn't it?",
 			'framerate',
 			'int',
-			120);
+			60);
 		addOption(option);
-		option.minValue = 24;
+		option.minValue = 60;
 		option.maxValue = 240;
 		option.displayFormat = '%v FPS';
 		option.onChange = onChangeFramerate;
